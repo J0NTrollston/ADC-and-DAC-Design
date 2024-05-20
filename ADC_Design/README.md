@@ -21,7 +21,7 @@ I plan to move the product from the breadboard to a Printed Circuit Board (PCB).
 The first design of the Flash ADC will have a 2-bit resolution. The ADC will take an analog signal in and output to a priority encoder to produce a weighted binary output. This output will be read with an 
 Arduino Uno to determine the analog voltage. Below is the architecture of the 2-bit Flash ADC.
 
-![Priority_Encoder_2-bit_K-Map](README_IMAGES/Priority_Encoder_2-bit_K-Map.png)
+![architecture_of_2-bit_Flash_ADC](README_IMAGES/architecture_of_2-bit_Flash_ADC.png)
 
 A Flash ADC will use a resistive ladder, comparators and a Priority Encoder to read the analog voltage and output a weighted binary value. The ADC Logic will have a resistor ladder used as the voltage divider. 
 Each node on the ladder will be the input to the non-inverting side of an operational amplifier. Although a comparator IC could be used here, I do not plan to use the ADC in a high frequency design. Therefore 
@@ -32,7 +32,7 @@ Uno to read in.
 ![Priority_Encoder_2-bit_Truth_Table](README_IMAGES/Priority_Encoder_2-bit_Truth_Table.png)
 
 #### Priority Encoder (2-bit)
-![Priority_Encoder_2-bit_combinational_logic](README_IMAGES/Priority_Encoder_2-bit_combinational_logic.png)
+![Priority_Encoder_2-bit_K-Map](README_IMAGES/Priority_Encoder_2-bit_K-Map.png)
 
 ### Hardware schematic
 ![Priority_Encoder_2-bit_combinational_logic](README_IMAGES/Priority_Encoder_2-bit_combinational_logic.png)
