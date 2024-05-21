@@ -53,6 +53,8 @@ Not at stage of product where Arduino has been implemented.
 * LM358 is not a Rail-to=Rail IC and max input is Vcc-1.5V
 
 ### Testing methodology or results
+![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
+[2-bit_Flash_ADC_Breadboard](https://youtu.be/c9W4OWWYJ1M)
 
 ### Observations and Conclusions
 
