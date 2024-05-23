@@ -1,26 +1,30 @@
-# ADC-and-DAC-Design
-This repository will be for logging my implementation of types of ADCs and DACs
+# ADC and DAC Design
 
-## By Brandon Ramos
+In this repository you will find my implementation of an ADC and DAC. After preliminary designs, breadboard prototypes are tested on a breakboard then to a PCB created within Altium. The ADC will be implemented in 2 different designs. First, creating a Flash ADC with 2-bit resolution. After testing, the design will be upgraded to 4-bit resolution and finalized onto a PCB. The second implementation will be the SAR ADC which will move through the same objectives as the Flash ADC. The DAC will be worked on between the two ADC designs as the SAR ADC uses a DAC to determine the analog voltage level. 
+
+![2-bit_Flash_ADC_Breadboard](ADC_Design/README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
+[2-bit Flash ADC Breadboard](https://youtu.be/c9W4OWWYJ1M)
+
 
 ## Table of Contents
-1. [Objectives or Purpose](#objectives-or-purpose)
-2. [Preliminary Design](#preliminary-design)
- * [Code](#code)
-3. [Software flow chart or algorithms](#software-flow-chart-or-algorithms)
- * [Pseudocode](#pseudocode)
-4. [Hardware schematic](#hardware-schematic)
-5. [Debugging](#debugging)
-6. [Testing methodology or results](#testing-methodology-or-results)
-7. [Observations and Conclusions](#observations-and-conclusions)
-8. [Documentation](#documentation)
- 
-### Objectives or Purpose 
-### Preliminary design
-### Software flow chart or algorithms
-### Hardware schematic
-#### Connections
-### Debugging
-### Testing methodology or results
-### Observations and Conclusions
-### Documentation
+* [Analog-to-Digital Converter (ADC) Design](https://github.com/J0NTrollston/ADC-and-DAC-Design/tree/main/ADC_Design)
+* [Digital-to-Analog Converter (DAC) Design (not yet implemented)](https://github.com/J0NTrollston/ADC-and-DAC-Design/tree/main/DAC_Design)
+
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] 2-bit ADC 
+    - [x] Breadboard Implementation
+    - [] Altium Schematic
+- [ ] 4-bit ADC 
+    - [] Altium Schematic
+    - [] Final PCB Product
+- [ ] 2-bit DAC
+    - [] Breadboard Implementation
+    - [] Altium Schematic
+- [ ] 4-bit DAC 
+    - [] Altium Schematic
+    - [] Final PCB Product
