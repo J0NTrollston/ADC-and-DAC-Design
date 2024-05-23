@@ -41,7 +41,7 @@ Arduino Uno to determine the analog voltage. Below is the architecture of the 2-
 
 ![architecture_of_2-bit_Flash_ADC](README_IMAGES/architecture_of_2-bit_Flash_ADC.png)
 
-A Flash ADC will use a resistive ladder, comparators and a Priority Encoder to read the analog voltage and output a weighted binary value. The ADC Logic will have a resistor ladder used as the voltage divider. 
+A Flash ADC will use a resistive ladder, comparators and a Priority Encoder to read the analog voltage and output a weighted binary value. An enable pin will be active high nominally. Once the device reading in the weighted binary value is ready, it will set the enable pin low to hold the current value using a latch. The ADC Logic will have a resistor ladder used as the voltage divider. 
 Each node on the ladder will be the input to the non-inverting side of an operational amplifier. Although a comparator IC could be used here, I do not plan to use the ADC in a high frequency design. Therefore 
 the LM358N Op-Amp can substitue the need for a comparator. The Priority Encoder will take the unweighted binary value from the LM358N and use combinational logic to output a weighted binary value for the Arduino 
 Uno to read in. For a 2-bit ADC, the resolution is one part in 3 (2<sup>2</sup>-1) which is not very useful. The Arduino Uno has a 10-bit ADC which has 1023 levels. Although the internal will need 2<sup>n</sup>-bits between the ADC Logic and the Priority Encoder, we reduce the number of lines out back to n-bits, in our case 2-bits.
@@ -65,7 +65,8 @@ Given the design of the Priority Encoder, we will next use this design alongside
 
 
 ### Software flow chart or algorithms
-Not at stage of product where Arduino has been implemented.
+<!-- Not at stage of product where Arduino has been implemented. !>> -->
+
 
 ### Debugging
 * LM358 is not a Rail-to=Rail IC and max input is Vcc-1.5V
