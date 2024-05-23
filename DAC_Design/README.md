@@ -1,7 +1,4 @@
-# ADC-and-DAC-Design
-This repository will be for logging my implementation of types of ADCs and DACs
-
-## By Brandon Ramos
+# (Not yet implemented) Implementation of a Digital-to-Analog Converter (DAC) using discrete components and Integrated Circuits (IC)
 
 ## Table of Contents
 1. [Objectives or Purpose](#objectives-or-purpose)

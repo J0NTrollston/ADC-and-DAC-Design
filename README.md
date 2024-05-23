@@ -11,20 +11,25 @@ In this repository you will find my implementation of an ADC and DAC. After prel
 * [Digital-to-Analog Converter (DAC) Design (not yet implemented)](https://github.com/J0NTrollston/ADC-and-DAC-Design/tree/main/DAC_Design)
 
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
+## Project-wide Roadmap
+- Flash Analog-to-Digital Converter
 - [ ] 2-bit ADC 
-    - [x] Breadboard Implementation
-    - [] Altium Schematic
+    - [X] Breadboard Implementation
+    - [ ] Altium Schematic
 - [ ] 4-bit ADC 
-    - [] Altium Schematic
-    - [] Final PCB Product
+    - [ ] Altium Schematic
+    - [ ] Final PCB Product
+- Digital-to-Analog Converter
 - [ ] 2-bit DAC
-    - [] Breadboard Implementation
-    - [] Altium Schematic
+    - [ ] Breadboard Implementation
+    - [ ] Altium Schematic
 - [ ] 4-bit DAC 
-    - [] Altium Schematic
-    - [] Final PCB Product
+    - [ ] Altium Schematic
+    - [ ] Final PCB Product
+- SAR Analog-to-Digital Converter
+- [ ] 2-bit ADC 
+    - [ ] Breadboard Implementation
+    - [ ] Altium Schematic
+- [ ] 4-bit ADC 
+    - [ ] Altium Schematic
+    - [ ] Final PCB Product

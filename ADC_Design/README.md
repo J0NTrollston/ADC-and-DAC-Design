@@ -1,6 +1,24 @@
 # Implementation of an Analog-to-Digtal Converter (ADC) using discrete components and Integrated Circuits (IC)
 
-#### Created by: Brandon Ramos
+![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
+
+## Roadmap
+- Flash Analog-to-Digital Converter
+- [ ] 2-bit ADC 
+    - [X] Breadboard Implementation
+    - [ ] Altium Schematic
+- [ ] 4-bit ADC 
+    - [ ] Altium Schematic
+    - [ ] Final PCB Product
+- SAR Analog-to-Digital Converter
+- [ ] 2-bit ADC 
+    - [ ] Breadboard Implementation
+    - [ ] Altium Schematic
+- [ ] 4-bit ADC 
+    - [ ] Altium Schematic
+    - [ ] Final PCB Product
+
+
 
 ## Table of Contents
 1. [Objectives or Purpose](#objectives-or-purpose)
@@ -43,7 +61,7 @@ By including 'X' in the K-Map grouping, we end up only using 3 logic gates shown
 Given the design of the Priority Encoder, we will next use this design alongside the Flash ADC resistive ladder and Op-Amps to create the hardware schematic. Included will be supplemental discrete components such as coupling capacitors and a voltage regulator. 
 
 ### Hardware schematic
-can be left for PCB Schematic
+<!-- can be left for PCB Schematic !>> -->
 
 
 ### Software flow chart or algorithms
@@ -51,6 +69,8 @@ Not at stage of product where Arduino has been implemented.
 
 ### Debugging
 * LM358 is not a Rail-to=Rail IC and max input is Vcc-1.5V
+    * Resistive ladder values
+    
 
 ### Testing methodology or results
 ![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
