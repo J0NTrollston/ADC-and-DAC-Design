@@ -75,7 +75,7 @@ Given the design of the Priority Encoder, we will next use this design alongside
 
 ### Testing methodology or results
 ![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
-[2-bit_Flash_ADC_Breadboard](https://youtu.be/c9W4OWWYJ1M)
+[2-bit_Flash_ADC_Breadboard](https://youtu.be/PeNcrnRGlsU)
 
 ### Observations and Conclusions
 
