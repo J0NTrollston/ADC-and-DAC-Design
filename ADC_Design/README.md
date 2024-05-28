@@ -43,8 +43,7 @@ Arduino Uno to determine the analog voltage. Below is the architecture of the 2-
 
 A Flash ADC will use a resistive ladder, comparators and a Priority Encoder to read the analog voltage and output a weighted binary value. An enable pin will be active high nominally. Once the device reading in the weighted binary value is ready, it will set the enable pin low to hold the current value using a latch. The ADC Logic will have a resistor ladder used as the voltage divider. 
 Each node on the ladder will be the input to the non-inverting side of an operational amplifier. Although a comparator IC could be used here, I do not plan to use the ADC in a high frequency design. Therefore 
-the LM358N Op-Amp can substitue the need for a comparator. The Priority Encoder will take the unweighted binary value from the LM358N and use combinational logic to output a weighted binary value for the Arduino 
-Uno to read in. For a 2-bit ADC, the resolution is one part in 3 (2<sup>2</sup>-1) which is not very useful. The Arduino Uno has a 10-bit ADC which has 1023 levels. Although the internal will need 2<sup>n</sup>-bits between the ADC Logic and the Priority Encoder, we reduce the number of lines out back to n-bits, in our case 2-bits.
+the LM358N Op-Amp can substitue the need for a comparator. Some other drawbacks in using the LM358N are discussed in [Debugging](#debugging). The Priority Encoder will take the unweighted binary value from the LM358N and use combinational logic to output a weighted binary value for the Arduino Uno to read in. For a 2-bit ADC, the resolution is one part in 3 (2<sup>2</sup>-1) which is not very useful. The Arduino Uno has a 10-bit ADC which has 1023 levels. Although the internal will need 2<sup>n</sup>-bits between the ADC Logic and the Priority Encoder, we reduce the number of lines out back to n-bits, in our case 2-bits.
 
 Within the Flash ADC, the Priority Encoder will first be designed. The ADC Logic will be designed later in Altium in Section [Hardware schematic](#hardware-schematic). With the Priority Encoder taking in 4 bits and outputting 2 bits, created below is the Truth Table with inputs x[3..0] and outputs y[1..0]. Note that only the realized outputs are shown in the table as others are not possible and considered as don't cares (X). In any combination where the higher bits are '1' then all lower bits must also be '1' as the resistor ladder will have lower potential nodes already lactive.  
 
@@ -69,14 +68,16 @@ Given the design of the Priority Encoder, we will next use this design alongside
 
 
 ### Debugging
-* LM358 is not a Rail-to=Rail IC and max input is Vcc-1.5V
-    * Resistive ladder values
+This section goes over the various issues I had throughout the project and how I resolved the problem. Not everything will work out as expected and being able to troubleshoot an issues gives you an excersise to determine if you actually know what you are doing. For example, the first issue I had came about when I was created my 2-bit Flash ADC on the breadboard. When I completed the comparator ADC Logic that took in a certain voltage from the resistive ladder, I was getting a different output than what was expected. Although my input voltage was lower than all voltage references on the resistive ladder, I saw a high voltage output from the op-amp used as the MSB. Although all other op-amps were firing as expected in referenc to the input voltage, I took me some time to determine what the issue was. Using the LM358N Operational Amplifier as my comparator in the ADC Logic, I noticed in the datasheet that the LM358N is not a Rail-to-Rail In IC. The highest input voltage allowed is 1.5V less than V<sub>cc</sub> which for a 5V Supply allows for a max input of 3.5V. Since I had an abudance of the LM358N ICs, I went ahead and used them instead of buying more chips for the project. I do see there being a possibility later in the future where I go back and change the LM358N to a different chip that is Rail-to-Rail but for the time being I will leave it as is. However, I cannot leave the resistor ladder unchanged. Because the MSB comparator must be less than 3.5V I doubled the value of the top resistor and left the rest of the values unchanges. For a 5V Supply and a R<sub>eq</sub> for the resistive ladder at 6 k&#8486; gives a current of 0.83 mA. So the voltage drop at the top resistor is 0.83 mA * 2 k&#8486; = 1.67V which is in the range of the max allowed input voltage of 3.5V.
+
+When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they already become a hastle to solve for 5 and 6 variables. As the 4-bit Flash ADC was going to have 16 variables into the priority encoder, I had to look elsewhere. I did consider using the Quine-McCluskey Method since it could hand way more variables than a K-Map. But considering space constraints and unnecessary complexity that would be added to the project, I decided to us a different approach. The SN74LS148N is an 8-to-3 line priority encoder which could be cascaded and create a 16-to-4 line encoder. At the time of writing this, I am sill in the process of working this out
     
 
 ### Testing methodology or results
 ![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
-[2-bit_Flash_ADC_Breadboard](https://youtu.be/PeNcrnRGlsU)
+[2-bit_Flash_ADC_Breadboard](https://youtu.be/kl4At6pt9WI)
 
 ### Observations and Conclusions
 
 ### Documentation
+<!-- parts list? !>> -->
