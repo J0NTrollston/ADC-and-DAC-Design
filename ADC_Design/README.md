@@ -61,6 +61,11 @@ Given the design of the Priority Encoder, we will next use this design alongside
 
 ### Hardware schematic
 <!-- can be left for PCB Schematic !>> -->
+![TopView_2-bit_Flash_ADC_Schematic](README_IMAGES/TopView_2-bit_Flash_ADC_Schematic.png)
+![ADC_Logic_2-bit_Flash_ADC_Schematic](README_IMAGES/ADC_Logic_2-bit_Flash_ADC_Schematic.png)
+![Power_2-bit_Flash_ADC_Schematic](README_IMAGES/Power_2-bit_Flash_ADC_Schematic.png)
+![Priority_Encoder_2-bit_Flash_ADC_Schematic](README_IMAGES/Priority_Encoder_2-bit_Flash_ADC_Schematic.png)
+![2-bit_Flash_ADC_PCB](README_IMAGES/2-bit_Flash_ADC_PCB.png)
 
 
 ### Software flow chart or algorithms
