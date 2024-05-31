@@ -6,7 +6,7 @@
 - Flash Analog-to-Digital Converter
 - [ ] 2-bit ADC 
     - [X] Breadboard Implementation
-    - [ ] Altium Schematic
+    - [X] Altium Schematic
 - [ ] 4-bit ADC 
     - [ ] Altium Schematic
     - [ ] Final PCB Product
