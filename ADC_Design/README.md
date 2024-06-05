@@ -82,6 +82,9 @@ When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they alre
 ![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
 [2-bit_Flash_ADC_Breadboard](https://youtu.be/kl4At6pt9WI)
 
+![4-bit_Flash_ADC_Breadboard](README_IMAGES/4-bit_Flash_ADC_Breadboard.jpg)
+[4-bit_Flash_ADC_Breadboard](https://youtu.be/iKHJjdzjozc)
+
 ### Observations and Conclusions
 
 ### Documentation
