@@ -1,6 +1,6 @@
 # Implementation of an Analog-to-Digtal Converter (ADC) using discrete components and Integrated Circuits (IC)
 
-![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
+![4-bit_Flash_ADC_Breadboard](README_IMAGES/4-bit_Flash_ADC_Breadboard.jpg)
 
 ## Roadmap
 - Flash Analog-to-Digital Converter
@@ -61,10 +61,24 @@ Given the design of the Priority Encoder, we will next use this design alongside
 
 ### Hardware schematic
 <!-- can be left for PCB Schematic !>> -->
+Below is the hardware schematics for the 2-bit Flash ADC. Going with a hierarchical schematic structure, we can see the Top View with the three system blocks.
+
 ![TopView_2-bit_Flash_ADC_Schematic](README_IMAGES/TopView_2-bit_Flash_ADC_Schematic.png)
+
+Next is the ADC Logic showing the resistor ladder with each node acting as a voltage comparator.
+
 ![ADC_Logic_2-bit_Flash_ADC_Schematic](README_IMAGES/ADC_Logic_2-bit_Flash_ADC_Schematic.png)
+
+Powering the circuit is the 7805CT voltage regulator which provides the 5V supply.
+
 ![Power_2-bit_Flash_ADC_Schematic](README_IMAGES/Power_2-bit_Flash_ADC_Schematic.png)
+
+The combinational logic produced form the K-Map shown below
+
 ![Priority_Encoder_2-bit_Flash_ADC_Schematic](README_IMAGES/Priority_Encoder_2-bit_Flash_ADC_Schematic.png)
+
+The final design converted to a PCB within Altium is shown below. The Bill Of Materials (BOM) Document for the design can be found [here]()
+
 ![2-bit_Flash_ADC_PCB](README_IMAGES/2-bit_Flash_ADC_PCB.png)
 
 
