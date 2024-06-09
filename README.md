@@ -12,10 +12,11 @@ In this repository you will find my implementation of an ADC and DAC. After prel
 
 ## Project-wide Roadmap
 - Flash Analog-to-Digital Converter
-- [ ] 2-bit ADC 
+- [X] 2-bit ADC 
     - [X] Breadboard Implementation
     - [X] Altium Schematic
 - [ ] 4-bit ADC 
+    - [X] Breadboard Implementation
     - [ ] Altium Schematic
     - [ ] Final PCB Product
 - Digital-to-Analog Converter

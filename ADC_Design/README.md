@@ -4,10 +4,11 @@
 
 ## Roadmap
 - Flash Analog-to-Digital Converter
-- [ ] 2-bit ADC 
+- [X] 2-bit ADC 
     - [X] Breadboard Implementation
     - [X] Altium Schematic
 - [ ] 4-bit ADC 
+    - [X] Breadboard Implementation
     - [ ] Altium Schematic
     - [ ] Final PCB Product
 - SAR Analog-to-Digital Converter
@@ -58,6 +59,15 @@ By including 'X' in the K-Map grouping, we end up only using 3 logic gates shown
 ![Priority_Encoder_2-bit_combinational_logic](README_IMAGES/Priority_Encoder_2-bit_combinational_logic.png)
 
 Given the design of the Priority Encoder, we will next use this design alongside the Flash ADC resistive ladder and Op-Amps to create the hardware schematic. Included will be supplemental discrete components such as coupling capacitors and a voltage regulator. 
+
+To determine what the max sampling rate will be, we need to determine the critical path of our schematic. As seen in the next section, we can determine the max propagation delay. The longest path for a signal will go through the LM438N and with slew rate of 0.3V/us for a max change from 0V to 5V we would see a 16us delay. 
+
+Next we look at the combinational logic which for the critical path goes through the 74LS04, 74LS08 and 74LS32. The LS04 has a max delay of 15ns, LS08 has a max delay of 18ns and the LS32 has a max delay of 15ns. 
+
+Finally, with the bistable latch we can expect a max delay for the 74LS75 to be 30ns. 
+
+Since the LM358 is a general op-amp we can't expect the propagation delay to be efficient so most of the time waiting for the signal to stabilize can be at the op-amp. Nevertheless, our critical path gives us a max propagation delay of 16us + 15ns + 18ns + 15 + 30ns = 16.078us for a max sampling rate close to 62kHz.
+
 
 ### Hardware schematic
 <!-- can be left for PCB Schematic !>> -->
