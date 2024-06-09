@@ -54,7 +54,7 @@ void ADC_2_bit(){
   PORTD_Reg &= ~(1<<Enable_Pin);
 
   // read data
-  y0 = (PINB_Reg &= (1<<PINB0));
+  y0 = (PINB_Reg) &= (1<<PINB0);
   y1 = (PINB_Reg) &= (1<<PINB1);
 
   // set enable back to high

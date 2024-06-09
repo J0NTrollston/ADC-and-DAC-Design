@@ -77,14 +77,27 @@ The combinational logic produced form the K-Map shown below
 
 ![Priority_Encoder_2-bit_Flash_ADC_Schematic](README_IMAGES/Priority_Encoder_2-bit_Flash_ADC_Schematic.png)
 
-The final design converted to a PCB within Altium is shown below. The Bill Of Materials (BOM) Document for the design can be found [here]()
+The final design converted to a PCB within Altium is shown below. The Bill Of Materials (BOM) Document for the design can be found in the [Documentation](#documentation) Section.
 
 ![2-bit_Flash_ADC_PCB](README_IMAGES/2-bit_Flash_ADC_PCB.png)
 
 
-### Software flow chart or algorithms
-<!-- Not at stage of product where Arduino has been implemented. !>> -->
+### Software algorithms or flow chart
+For the 2-bit Flash ADC the [Arduino Code](https://github.com/J0NTrollston/ADC-and-DAC-Design/blob/main/ADC-DAC-Arduino_Code/src/main.cpp) will take in 2 inputs and outputs an enable pin to the ADC to hold the data. The enable pin is active high and is pulled low while reading the 2 bits. Adding a delay will set the sampling frequency from the ADC but should be no less than 1ms for stability. 
 
+    // set enable to low and latch onto current data
+    PORTD_Reg &= ~(1<<Enable_Pin);
+
+    // read data
+    y0 = (PINB_Reg) &= (1<<PINB0);
+    y1 = (PINB_Reg) &= (1<<PINB1);
+
+    // set enable back to high
+    PORTD_Reg |= (1<<Enable_Pin);
+
+Below if the general flowchart for the Arduino Code to take in the ADC data.
+
+![Flash ADC Flowchart](/ADC_Design/README_IMAGES/Flash_ADC_Flowchart.png)
 
 ### Debugging
 This section goes over the various issues I had throughout the project and how I resolved the problem. Not everything will work out as expected and being able to troubleshoot an issues gives you an excersise to determine if you actually know what you are doing. For example, the first issue I had came about when I was created my 2-bit Flash ADC on the breadboard. When I completed the comparator ADC Logic that took in a certain voltage from the resistive ladder, I was getting a different output than what was expected. Although my input voltage was lower than all voltage references on the resistive ladder, I saw a high voltage output from the op-amp used as the MSB. Although all other op-amps were firing as expected in referenc to the input voltage, I took me some time to determine what the issue was. Using the LM358N Operational Amplifier as my comparator in the ADC Logic, I noticed in the datasheet that the LM358N is not a Rail-to-Rail In IC. The highest input voltage allowed is 1.5V less than V<sub>cc</sub> which for a 5V Supply allows for a max input of 3.5V. Since I had an abudance of the LM358N ICs, I went ahead and used them instead of buying more chips for the project. I do see there being a possibility later in the future where I go back and change the LM358N to a different chip that is Rail-to-Rail but for the time being I will leave it as is. However, I cannot leave the resistor ladder unchanged. Because the MSB comparator must be less than 3.5V I doubled the value of the top resistor and left the rest of the values unchanges. For a 5V Supply and a R<sub>eq</sub> for the resistive ladder at 6 k&#8486; gives a current of 0.83 mA. So the voltage drop at the top resistor is 0.83 mA * 2 k&#8486; = 1.67V which is in the range of the max allowed input voltage of 3.5V.
@@ -93,13 +106,17 @@ When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they alre
     
 
 ### Testing methodology or results
+Testing the 2-bit Flash ADC I had added a variable resistor which is connected as the voltage in for the comparators. While changing the input voltage, the arduino code latches onto the data and reads in the 2-bit value. The breadboard design is shown below but for a visual demonstration without the arduino is shown in this [Video](https://youtu.be/kl4At6pt9WI).
 ![2-bit_Flash_ADC_Breadboard](README_IMAGES/2-bit_Flash_ADC_Breadboard.jpg)
-[2-bit_Flash_ADC_Breadboard](https://youtu.be/kl4At6pt9WI)
+
+With the same testing method used for the 2-bit design, I change the input voltage with a variable resistor on the 4-bit breadboard design shown below. For the visual demonstration without the arduino can be shown in this [Video](https://youtu.be/iKHJjdzjozc).
 
 ![4-bit_Flash_ADC_Breadboard](README_IMAGES/4-bit_Flash_ADC_Breadboard.jpg)
-[4-bit_Flash_ADC_Breadboard](https://youtu.be/iKHJjdzjozc)
+
+
 
 ### Observations and Conclusions
 
 ### Documentation
 <!-- parts list? Add BOM !>> -->
+- [2-bit Flash ADC Bill Of Materials (BOM)](https://github.com/J0NTrollston/ADC-and-DAC-Design/blob/main/ADC_Design/2-bit-Flash-ADC-and-DAC-Design-BOM.xlsx)
