@@ -110,9 +110,39 @@ Below if the general flowchart for the Arduino Code to take in the ADC data.
 ![Flash ADC Flowchart](/ADC_Design/README_IMAGES/Flash_ADC_Flowchart.png)
 
 ### Debugging
-This section goes over the various issues I had throughout the project and how I resolved the problem. Not everything will work out as expected and being able to troubleshoot an issues gives you an excersise to determine if you actually know what you are doing. For example, the first issue I had came about when I was created my 2-bit Flash ADC on the breadboard. When I completed the comparator ADC Logic that took in a certain voltage from the resistive ladder, I was getting a different output than what was expected. Although my input voltage was lower than all voltage references on the resistive ladder, I saw a high voltage output from the op-amp used as the MSB. Although all other op-amps were firing as expected in referenc to the input voltage, I took me some time to determine what the issue was. Using the LM358N Operational Amplifier as my comparator in the ADC Logic, I noticed in the datasheet that the LM358N is not a Rail-to-Rail In IC. The highest input voltage allowed is 1.5V less than V<sub>cc</sub> which for a 5V Supply allows for a max input of 3.5V. Since I had an abudance of the LM358N ICs, I went ahead and used them instead of buying more chips for the project. I do see there being a possibility later in the future where I go back and change the LM358N to a different chip that is Rail-to-Rail but for the time being I will leave it as is. However, I cannot leave the resistor ladder unchanged. Because the MSB comparator must be less than 3.5V I doubled the value of the top resistor and left the rest of the values unchanges. For a 5V Supply and a R<sub>eq</sub> for the resistive ladder at 6 k&#8486; gives a current of 0.83 mA. So the voltage drop at the top resistor is 0.83 mA * 2 k&#8486; = 1.67V which is in the range of the max allowed input voltage of 3.5V.
+This section goes over the various issues I had throughout the project and how I resolved the problem. Not everything will work out as expected and being able to troubleshoot an issues gives you an excersise to determine if you actually know what you are doing. For example, the first issue I had came about when I was created my 2-bit Flash ADC on the breadboard. When I completed the comparator ADC Logic that took in a certain voltage from the resistive ladder, I was getting a different output than what was expected. Although my input voltage was lower than all voltage references on the resistive ladder, I saw a high voltage output from the op-amp used as the MSB. Although all other op-amps were firing as expected in referenc to the input voltage, I took me some time to determine what the issue was. Using the LM358N Operational Amplifier as my comparator in the ADC Logic, I noticed in the datasheet that the LM358N is not a Rail-to-Rail In IC. The highest input voltage allowed is 1.5V less than V<sub>cc</sub> which for a 5V Supply allows for a max input of 3.5V. Since I had an abudance of the LM358N ICs, I went ahead and used them instead of buying more chips for the project. I do see there being a possibility later in the future where I go back and change the LM358N to a different chip that is Rail-to-Rail but for the time being I will leave it as is. However, I cannot leave the resistor ladder unchanged. Because the MSB comparator must be less than 3.5V I doubled the value of the top resistor and left the rest of the values unchanges. For a 5V Supply and a R<sub>eq</sub> for the resistive ladder at 6 k&#8486; gives a current of 0.83 mA. So the voltage drop at the top resistor is 0.83 mA * 2 k&#8486; = 1.67V which is in the range of the max allowed input voltage of 3.5V. With the LM358N not being a Rail-to-Rail op-amp, our 2-bit and 4-bit Flash ADC will not evenly measure the incoming voltage level. Therefore I have created a table below to describe the representation between each incoming voltage level to the output.
 
-When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they already become a hastle to solve for 5 and 6 variables. As the 4-bit Flash ADC was going to have 16 variables into the priority encoder, I had to look elsewhere. I did consider using the Quine-McCluskey Method since it could hand way more variables than a K-Map. But considering space constraints and unnecessary complexity that would be added to the project, I decided to us a different approach. The SN74LS148N is an 8-to-3 line priority encoder which could be cascaded and create a 16-to-4 line encoder. At the time of writing this, I am sill in the process of working this out
+#### 2-bit Flash ADC encoded voltage level reference
+| Voltage Ladder (Volts) | Encoded Output |
+|---|---|
+| 3.33 | 11 |
+| 2.50 | 10 |
+| 1.67 | 01 |
+| 0.83 | 00 |
+
+#### 4-bit Flash ADC encoded voltage level reference
+
+| Voltage Ladder (Volts) | Encoded Output |
+|---|---|
+| 3.49 | 1111 |
+| 3.27 | 1110 |
+| 3.05 | 1101 |
+| 2.83 | 1100 |
+| 2.61 | 1011 |
+| 2.40 | 1010 |
+| 2.18 | 1001 |
+| 1.94 | 1000 |
+| 1.74 | 0111 |
+| 1.52 | 0110 |
+| 1.30 | 0101 |
+| 1.09 | 0100 |
+| 0.87 | 0011 |
+| 0.65 | 0010 |
+| 0.43 | 0001 |
+| 0.21 | 0000 |
+
+
+When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they already become a hastle to solve for 5 and 6 variables. As the 4-bit Flash ADC was going to have 16 variables into the priority encoder, I had to look elsewhere. I did consider using the Quine-McCluskey Method since it could hand way more variables than a K-Map. But considering space constraints and unnecessary complexity that would be added to the project, I decided to us a different approach. The SN74LS148N is an 8-to-3 line priority encoder which could be cascaded and create a 16-to-4 line encoder. At the time of writing this, I am sill in the process of working this out.
     
 
 ### Testing methodology or results
