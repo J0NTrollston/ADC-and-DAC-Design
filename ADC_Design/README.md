@@ -37,6 +37,7 @@ resolution to 4-bit. Another implementation is the SAR ADC which will be my next
 I will move the product from the breadboard to a Printed Circuit Board (PCB).
 
 ### Preliminary design
+#### 2-bit Flash ADC
 The first design of the Flash ADC will have a 2-bit resolution. The ADC will take an analog signal in and output to a priority encoder to produce a weighted binary output. This output will be read with an 
 Arduino Uno to determine the analog voltage. Below is the architecture of the 2-bit Flash ADC.
 
@@ -68,6 +69,16 @@ Finally, with the bistable latch we can expect a max delay for the 74LS75 to be 
 
 Since the LM358 is a general op-amp we can't expect the propagation delay to be efficient so most of the time waiting for the signal to stabilize can be at the op-amp. Nevertheless, our critical path gives us a max propagation delay of 16us + 15ns + 18ns + 15 + 30ns = 16.078us for a max sampling rate close to 62kHz.
 
+#### 4-bit Flash ADC
+The next design is the 4-bit Flash ADC whic is built similar to the 2-bit design but with a slight modification to the priority encoder circuit. Below is the updated architecture for the 4-bit design.
+
+![architecture_of_4-bit_Flash_ADC](README_IMAGES/architecture_of_4-bit_Flash_ADC.png)
+
+Using the LM358N Op-Amp we will need to increase the number of ICs used from 2 to 8 to compare the incoming voltage into 15 distinct levels. In the 2-bit design, the combinational logic for the priority encoder took in 4 variables and was completed using a K-Map. With the 4-bit design, in order to solve using a K-Map we would use 16 variables. As solving a K-Map with 5 variables already becomes difficult by hand, 16 variables for a computer is not efficient when there are simpler solutions. While looking at solutions to this problem within the [Debugging](#debugging) Section, I determined the best solution was to use an 8 to 3 line priority encoder. The 74LS148N is an 8 to 3 line priority encoder that is compatible with Transistor-Transistor Logic (TTL) as it is inside the 74LS IC family. By cascading 2 of these ICs together, we can create a 16 to 4 line priority encoder which can be used in place of our combinatinal logic previously solved by the K-Map. Straight from the datasheet for the [SN74LS148N](https://www.ti.com/lit/ds/symlink/sn54ls148.pdf?ts=1718085474640&ref_url=https%253A%252F%252Fwww.google.com%252F) can be found an application diagram showing how to create the 16 to 4 line priority encoder. Below I have screenshotted this diagram to display the required connections.
+
+![74LS148_16-bit_priority_encoder](README_IMAGES/74LS148_16-bit_priority_encoder.png)
+
+Note that the connections to the 74LS148 are active low and in order to be compatible with the current design, we will need to use inverters for the input and output signals. Once complete, we can use the existing latch IC to output the digital logic upon holding the enable pin low. 
 
 ### Hardware schematic
 <!-- can be left for PCB Schematic !>> -->
@@ -142,7 +153,7 @@ This section goes over the various issues I had throughout the project and how I
 | 0.21 | 0000 |
 
 
-When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they already become a hastle to solve for 5 and 6 variables. As the 4-bit Flash ADC was going to have 16 variables into the priority encoder, I had to look elsewhere. I did consider using the Quine-McCluskey Method since it could hand way more variables than a K-Map. But considering space constraints and unnecessary complexity that would be added to the project, I decided to us a different approach. The SN74LS148N is an 8-to-3 line priority encoder which could be cascaded and create a 16-to-4 line encoder. At the time of writing this, I am sill in the process of working this out.
+When designing the 4-bit Flash ADC, using a K-Map was an obvious no as they already become a hastle to solve for 5 and 6 variables. As the 4-bit Flash ADC was going to have 16 variables into the priority encoder, I had to look elsewhere. I did consider using the Quine-McCluskey Method since it could hand way more variables than a K-Map. But considering space constraints and unnecessary complexity that would be added to the project, I decided to us a different approach. The SN74LS148N is an 8-to-3 line priority encoder which could be cascaded and create a 16-to-4 line encoder. Although the inputs are active low, we can invert the signals coming in and out as to use it with our existing logic.
     
 
 ### Testing methodology or results
@@ -160,3 +171,5 @@ With the same testing method used for the 2-bit design, I change the input volta
 ### Documentation
 <!-- parts list? Add BOM !>> -->
 - [2-bit Flash ADC Bill Of Materials (BOM)](https://github.com/J0NTrollston/ADC-and-DAC-Design/blob/main/ADC_Design/2-bit-Flash-ADC-and-DAC-Design-BOM.xlsx)
+
+- [SN74LS148N Datasheet](https://www.ti.com/lit/ds/symlink/sn54ls148.pdf?ts=1718085474640&ref_url=https%253A%252F%252Fwww.google.com%252F)
